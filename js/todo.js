@@ -1,6 +1,5 @@
 $(document)
     .ready(function () {
-
         function generateUUID() {
             /*jshint bitwise:false */
             var i,
@@ -28,7 +27,7 @@ $(document)
             $(".input-text").val("");
         }
 
-        $(document).on("click","#button",function(){
+        $('#button').click(function(){
             addToDo();
         });
 
@@ -40,6 +39,35 @@ $(document)
             if(e.keyCode == 13)
             {
                 addToDo();
+            }
+        });
+
+        $('.done-todo').change(function() {
+            if($(this).is(":checked")){
+              $(this).parent().addClass("checked");
+            }else{
+              $(this).parent().removeClass("checked");
+            }
+        })
+
+        $('li').dblclick(function() {
+            $(this).attr('contentEditable', 'true');
+            $(this).keypress(function(event) {
+                if (event.which == '13') {
+                    $(this).attr('contenteditable', 'false');
+                }
+            })
+        });
+
+        $("[href='#']").click(function() {
+            if ($(this).attr("data-filter") == "all") {
+                $('ol li').show();
+            } else if ($(this).attr("data-filter") == "active") {
+                $('ol li').show();
+                $('ol li.checked').hide();
+            } else if ($(this).attr("data-filter") == "complete") {
+                $('ol li').hide();
+                $('ol li.checked').show();
             }
         });
 
