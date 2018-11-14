@@ -20,6 +20,28 @@ $(document)
             }
             return uuid;
         }
+          
+        function addToDo() {
+            var input = $(".input-text").val();
+            $("ol").append(`<li id="` + generateUUID() + `" class="">
+            <input name="done-todo" type="checkbox" class="done-todo"> ` + input + ` </li>`);
+            $(".input-text").val("");
+        }
+
+        $(document).on("click","#button",function(){
+            addToDo();
+        });
+
+        $('.input-text').bind("enterKey",function(e){
+            addToDo();
+        });
+
+        $('.input-text').keyup(function(e){
+            if(e.keyCode == 13)
+            {
+                addToDo();
+            }
+        });
 
         // code to be implemented
     });
